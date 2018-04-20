@@ -193,6 +193,10 @@ public void loadCars() throws SQLException
             
             carTable.getItems().addAll(cars);
             
+            years.setText("Audi car mileage: ");
+            cars.stream().filter(name -> name.getMake().equals("Audi"))
+                    .forEach(name -> years.setText(years.getText() + " " + name.getMileage()));
+            
            
         }
         

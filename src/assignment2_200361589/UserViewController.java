@@ -5,18 +5,24 @@
  */
 package assignment2_200361589;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -33,6 +39,8 @@ public class UserViewController implements Initializable {
     @FXML private TextField userNameTextField;
     @FXML private Label errMsgLabel;
     @FXML private Label headerLabel;
+    @FXML private ImageView imageView;
+    private File imageFile;
     
     //used for the passwords
     @FXML private PasswordField pwField;
@@ -106,6 +114,16 @@ public class UserViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+         try{
+            imageFile = new File("./src/Image/register.jpg");
+            BufferedImage bufferedImage = ImageIO.read(imageFile);
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            imageView.setImage(image);
+        }
+        catch(IOException e){
+            System.err.println(e.getMessage());
+            
+        }
     }    
     
 }

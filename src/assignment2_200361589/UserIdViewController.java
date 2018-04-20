@@ -12,7 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ResourceBundle;
+import java.util.ResourceBundle;   
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -59,6 +59,7 @@ public class UserIdViewController implements Initializable {
             //4. create contact objects from each record
             while(resultSet.next())
             {
+                
                 userId.setText(Integer.toString(resultSet.getInt("userId")));
 
             }
