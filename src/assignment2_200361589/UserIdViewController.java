@@ -34,6 +34,9 @@ public class UserIdViewController implements Initializable {
    @FXML
     private Label userId;
     
+     /**
+     * This method change scene to the Login View without registering
+     */
      public void logInButtonPushed(ActionEvent event) throws IOException
     {
         SceneChanger sc = new SceneChanger();
@@ -41,6 +44,10 @@ public class UserIdViewController implements Initializable {
             sc.changeScenes(event, "login.fxml", "Login");
     }
    
+     /**
+      * This method gives the unique generated userId
+      * @throws SQLException 
+      */
     public void loadUserId() throws SQLException
     {
         Connection conn = null;

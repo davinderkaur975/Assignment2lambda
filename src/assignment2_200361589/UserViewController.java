@@ -46,6 +46,10 @@ public class UserViewController implements Initializable {
     @FXML private PasswordField pwField;
     @FXML private PasswordField confirmPwField;
     
+    
+     /**
+     * This method change scene to the Login View without registering
+     */
      public void cancelButtonPushed(ActionEvent event) throws IOException
     {
         SceneChanger sc = new SceneChanger();
@@ -54,14 +58,18 @@ public class UserViewController implements Initializable {
     }
     
      /**
-     * This method will validate that the passwords match
-     * 
+     * This method will validate that the passwords is greater than 8 digits or words
      */
      public boolean pwChecker(){
+       
+       //use of lambda expression to ccheck that the password length is greater than 8
        Predicate<String> pwChecker = (passwordArgument) -> passwordArgument.length() > 8;
        return pwChecker.test(pwField.getText());
      }
      
+     /**
+     * This method will validate that the password field and confirm password field are same
+     */
     public boolean validPassword()
     {
         if (pwField.getText().equals(confirmPwField.getText()))
@@ -73,8 +81,8 @@ public class UserViewController implements Initializable {
     
     
     /**
-     * This method will read from the scene and try to create a new instance of a Volunteer.
-     * If a volunteer was successfully created, it is updated in the database.
+     * This method will read from the scene and try to create a new instance of a User.
+     * If a user was successfully created, it is updated in the database.
      */
     public void saveButtonPushed(ActionEvent event) throws NoSuchAlgorithmException, SQLException
     {
@@ -87,12 +95,12 @@ public class UserViewController implements Initializable {
                 user = new User(userNameTextField.getText(), 
                                         pwField.getText());
              
-                    errMsgLabel.setText("");    //do not show errors if creating Volunteer was successful
+                    errMsgLabel.setText("");   
                     user.insertIntoDB();    
                 
 
                 SceneChanger sc = new SceneChanger();
-                sc.changeScenes(event, "UserIdView.fxml", "All Volunteers");
+                sc.changeScenes(event, "UserIdView.fxml", "User Unique Id");
                 
             }
             catch (Exception e)
@@ -114,6 +122,7 @@ public class UserViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+         errMsgLabel.setText(""); 
          try{
             imageFile = new File("./src/Image/register.jpg");
             BufferedImage bufferedImage = ImageIO.read(imageFile);

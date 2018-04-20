@@ -38,14 +38,32 @@ public class LoginController implements Initializable {
     @FXML private PasswordField pwField;
     @FXML private Label errMsgLabel;
     
+    /**
+     * This method change scene to registration View
+     */
+    public void registerButtonPushed(ActionEvent event) throws IOException
+    {
+        SceneChanger sc = new SceneChanger();
+        
+            sc.changeScenes(event, "UserView.fxml", "Register");
+    }
+    
+    /**
+     * This method login the user and takes the user to another view
+     * @param event
+     * @throws IOException
+     * @throws NoSuchAlgorithmException 
+     */
+    
       public void loginButtonPushed(ActionEvent event) throws IOException, NoSuchAlgorithmException
     {
-        //query the database with the volunteerID provided, get the salt
+        //query the database with the userID provided, get the salt
         //and encrypted password stored in the database
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet resultSet = null;
         
+        //use of lambda expression to convert the string
         Function<String, Integer> converter = (stringToConvert) -> Integer.parseInt(stringToConvert);
         int userNum = converter.apply(userIdTextField.getText());
         

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -83,14 +84,19 @@ public void loadCars() throws SQLException
             }
             carTable.getItems().addAll(cars);
             
+            //use of stream to print the total number of cars
             long car = cars.stream().count();
             String total = Long.toString(car);
             numberOfCars.setText("Number of cars : " +total);
 
-          
-            years.setText("Audi car mileage: ");
+            //use of stream and lambda expression to filter the audi cars and get their mileage
+            years.setText("Audi mileage: ");
             cars.stream().filter(name -> name.getMake().equals("Audi"))
                     .forEach(name -> years.setText(years.getText() + " " + name.getMileage()));
+            
+            //use of lambda expression to write the text in upper case
+            UnaryOperator<String> str = (years) -> years.toUpperCase();
+            years.setText(str.apply(years.getText()));
            
             
           
@@ -193,9 +199,17 @@ public void loadCars() throws SQLException
             
             carTable.getItems().addAll(cars);
             
+              long car = cars.stream().count();
+            String total = Long.toString(car);
+            numberOfCars.setText("Number of cars : " +total);
+            
             years.setText("Audi car mileage: ");
             cars.stream().filter(name -> name.getMake().equals("Audi"))
                     .forEach(name -> years.setText(years.getText() + " " + name.getMileage()));
+            
+            
+            UnaryOperator<String> str = (years) -> years.toUpperCase();
+            years.setText(str.apply(years.getText()));
             
            
         }
